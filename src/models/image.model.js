@@ -8,9 +8,18 @@ const imageSchema = new mongoose.Schema({
     imageName:{
         type:String,
         required:true,
-        unique:true,
-
+    },
+    operationType:{
+        type:String,
+        enum:["remove-bg","replace-bg"],
+        required:true
+    },
+    prompt:{
+        type:String,
+        default:null
     }
+},{
+    timestamps:true
 })
 
 const imageModel = mongoose.model('image', imageSchema)

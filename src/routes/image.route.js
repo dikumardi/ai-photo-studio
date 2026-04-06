@@ -4,11 +4,20 @@ const multer = require('multer');
 
 const router = express.Router()
 
-const upload = multer({storage:multer.memoryStorage()})
+const upload = multer({storage:multer.memoryStorage(),
+     limits: { fileSize: 5 * 1024 * 1024 } // 5MB
+})
 
-router.post('/',
+// Remove BG
+router.post('/remove-bg',
     upload.single('image'),
     uploadController.uploadImageController)
+
+    // Replace  BG
+router.post('/replace -bg',
+    upload.single('image'),
+    uploadController.replaceBgController)
+
 
 
 module.exports = router

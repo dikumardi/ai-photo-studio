@@ -85,3 +85,49 @@ exports.replaceBgController = async (req, res) => {
   }
 };
 
+exports.outfitChangeController  = async (req, res) => {
+  try {
+    const { imageName, prompt } = req.body;
+    const file = req.file;
+
+    if (!imageName || !prompt) {
+      return res.status(400).json({ message: "imageName and prompt is required" });
+    }
+
+    if (!prompt) {
+      return res.status(400).json({ message: "prompt is required" });
+    }
+
+    if (!file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
+
+    if (!file.mimetype.startsWith("image/")) {
+      return res.status(400).json({ message: "Only images allowed" });
+    }
+
+    //   change outfit  using Clipdrop
+    const outfitImage = await changeOutfit(file.buffer, prompt);
+
+    const image = await processAndSaveImage(
+      outfitImage,
+      file,
+      imageName,
+      "outfit-change",
+      prompt
+    )
+  
+
+    //  Response
+    res.status(201).json({
+      message: "Outfit changed successfully",
+      image,
+    });
+  } catch (err) {
+   
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
+

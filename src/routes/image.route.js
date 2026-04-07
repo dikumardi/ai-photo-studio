@@ -14,10 +14,16 @@ router.post('/remove-bg',
     uploadController.uploadImageController)
 
     // Replace  BG
-router.post('/replace -bg',
+router.post('/replace-bg',
     upload.single('image'),
     uploadController.replaceBgController)
 
+    //outfit change
+    router.post(
+  "/change-outfit",
+  upload.single("image"),
+  uploadController.outfitChangeController
+);
 
 
 module.exports = router

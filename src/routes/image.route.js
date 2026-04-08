@@ -1,5 +1,6 @@
 const express = require('express');
 const uploadController = require('../controller/upload.controller');
+const printLayoutController = require('../controller/print.controller');
 const multer = require('multer');
 
 const router = express.Router()
@@ -25,6 +26,12 @@ router.post('/replace-bg',
   uploadController.outfitChangeController
 );
 
+
+router.post(
+  "/print-layout",
+  upload.array("images", 10),
+  printLayoutController.printLayoutController
+);
 
 module.exports = router
 

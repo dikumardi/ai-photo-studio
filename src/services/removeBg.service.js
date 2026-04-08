@@ -11,7 +11,8 @@ async function removeBackground(imageBuffer) {
     headers: {
       'X-Api-Key': process.env.REMOVE_BG_API_KEY
     },
-    responseType: 'arraybuffer'
+    responseType: 'arraybuffer',
+     timeout: 30000,
   });
 
   return response.data;

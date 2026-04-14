@@ -11,7 +11,7 @@ const imageSchema = new mongoose.Schema({
     },
     operationType:{
         type:String,
-        enum:["remove-bg","replace-bg,outfit-change"],
+        enum:["remove-bg","replace-bg","outfit-change"],
         required:true
     },
     prompt:{
